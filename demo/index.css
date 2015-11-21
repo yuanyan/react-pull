@@ -1,0 +1,107 @@
+.container {
+  position: relative;
+	height: 200%;
+	-webkit-transform: translate3d(0,-50%,0);
+	transform: translate3d(0,-50%,0);
+}
+
+.container--reset {
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+}
+
+.action-wrap {
+	height: 50%;
+	background: #9E8DDA;
+  position: relative;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.action {
+	height: 90px;
+	width: 270px;
+	margin: 0 auto;
+	z-index: 1;
+	position: relative;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-justify-content: space-around;
+	justify-content: space-around;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+/* Default selection for first item */
+.action::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -30px 0 0 -30px;
+	background: #7C6FAB;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	z-index: -1;
+	opacity: 0;
+	-webkit-transform: scale3d(0.1,0.1,1);
+	transform: scale3d(0.1,0.1,1);
+}
+
+.action--select-1::before {
+	-webkit-transform: translate3d(-90px,0,0) scale3d(0.1,0.1,1);
+	transform: translate3d(-90px,0,0) scale3d(0.1,0.1,1);
+}
+
+.action--select-3::before {
+	-webkit-transform: translate3d(90px,0,0) scale3d(0.1,0.1,1);
+	transform: translate3d(90px,0,0) scale3d(0.1,0.1,1);
+}
+
+/* move to the right position */
+.container--active .action::before {
+	opacity: 1;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.container--active .action--select-1::before {
+	-webkit-transform: translate3d(-90px,0,0);
+	transform: translate3d(-90px,0,0);
+}
+
+.container--active .action--select-2::before {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+.container--active .action--select-3::before {
+	-webkit-transform: translate3d(90px,0,0);
+	transform: translate3d(90px,0,0);
+}
+
+/* scale up and fade out */
+.container--action .action::before {
+	opacity: 0;
+	-webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+	transition: transform 0.5s, opacity 0.5s;
+}
+
+.container--action .action--select-1::before {
+	-webkit-transform: translate3d(-90px,0,0) scale3d(20,20,1);
+	transform: translate3d(-90px,0,0) scale3d(20,20,1);
+}
+
+.container--action .action--select-2::before {
+	-webkit-transform: scale3d(20,20,1);
+	transform: scale3d(20,20,1);
+}
+
+.container--action .action--select-3::before {
+	-webkit-transform: translate3d(90px,0,0) scale3d(20,20,1);
+	transform: translate3d(90px,0,0) scale3d(20,20,1);
+}

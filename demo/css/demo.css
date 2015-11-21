@@ -1,0 +1,34 @@
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after {display: table;  content: ''; }
+.clearfix:after { clear: both; }
+html, body, .container {
+	height: 100%;
+}
+
+body {
+	font-family: Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
+	color: #D5D6E2;
+	font-size: 18px;
+	background: #494A5F;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+	height: 100%;
+	position: relative;
+}
+
+.action__item {
+	position: relative;
+	text-align: center;
+	-webkit-flex: 1 1 auto;
+	flex: 1 1 auto;
+	line-height: 60px;
+	font-size: 1.5em;
+	width: 60px;
+	height: 60px;
+	z-index: 100;
+	color: white;
+}
