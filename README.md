@@ -1,6 +1,6 @@
 # PULL
 
-![screenshot](http://g.recordit.co/zG12sMXHjU.gif)
+![screenshot](https://raw.githubusercontent.com/yuanyan/react-pull/master/screenshot/screenshot.gif)
 
 ### Usage
 
