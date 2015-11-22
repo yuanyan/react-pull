@@ -5,7 +5,6 @@ var Page = require('./Page');
 
 var Demo = React.createClass({
   render: function() {
-
     return (
       <Pull component={Page}>
         <a href="#" style={styles.action}><i className="fa fa-plus"></i></a>

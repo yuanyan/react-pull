@@ -6,34 +6,50 @@ var hasClass = require('react-kit/hasClass');
 var onEndTransition = require('react-kit/onEndTransition')
 var throttle = require('react-kit/throttle');
 
-var win = {width: window.innerWidth, height: window.innerHeight};
+var win = {
+  width: window.innerWidth,
+  height: window.innerHeight
+};
 var docElem = window.document.documentElement;
-function scrollY() { return window.pageYOffset || docElem.scrollTop; }
+function scrollY() {
+  return window.pageYOffset || docElem.scrollTop;
+}
 
 var Pull = React.createClass({
   // percentage (factor from 0 to 1) of the window width to take in consideration
   winfactor: 0.8,
-  // the distance the container needs to be translated
-  translateVal: null,
   // friction factor
   friction: 2.5,
   // distance in px needed to push down the menu in order to be able to action
   triggerDistance: 120,
+  // the distance the container needs to be translated
+  translateVal: null,
   // position of the current selected share item
   posShareEl: null,
   // touch events: position of the initial touch (y-axis)
   firstTouchY: null,
   initialScroll: null,
-  // deviceorientation || touchmove
-  triggerOn: 'touchmove',
+
+  propTypes: {
+    triggerOn: React.PropTypes.oneOf(['touchmove', 'deviceorientation'])
+  },
+  getDefaultProps: function() {
+    return {
+      triggerOn: 'touchmove'
+    }
+  },
   componentDidMount: function() {
     this.actionElemsTotal = React.Children.count(this.props.children);
     this.actionEl = ReactDOM.findDOMNode(this.refs.action);
+    var actions = this.actionEl.children;
+    for(var i=0; i<actions.length; i++) {
+      addClass(actions[i], 'action-' + (i+1));
+    }
   },
   handleTouchStart: function(ev){
     var contentEl = ReactDOM.findDOMNode(this.refs.container);
 
-    if( this.triggerOn === 'deviceorientation' ) {
+    if( this.props.triggerOn === 'deviceorientation' ) {
       window.addEventListener('deviceorientation', handleOrientation);
     }
 
@@ -66,7 +82,7 @@ var Pull = React.createClass({
       }
 
       // change the selected action item when moving to the left/right.
-      if( this.triggerOn === 'touchmove' ) {
+      if( this.props.triggerOn === 'touchmove' ) {
         this.selectAction(ev);
       }
 
@@ -89,7 +105,7 @@ var Pull = React.createClass({
   handleTouchEnd: function(ev){
     var contentEl = ReactDOM.findDOMNode(this.refs.container);
 
-    if( this.triggerOn === 'deviceorientation' ) {
+    if( this.props.triggerOn === 'deviceorientation' ) {
       window.removeEventListener('deviceorientation', this.handleOrientation);
     }
 
@@ -152,11 +168,10 @@ var Pull = React.createClass({
   render: function(){
     return (
       <div style={{height: win.height}}>
-        <div ref="container"
+        <div ref="container" className="container"
           onTouchStart={this.handleTouchStart}
           onTouchMove={this.handleTouchMove}
-          onTouchEnd={this.handleTouchEnd}
-          className="container">
+          onTouchEnd={this.handleTouchEnd}>
           <div ref="actionWrap" className="action-wrap">
             <div ref="action" className="action">
               {this.props.children}

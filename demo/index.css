@@ -21,7 +21,7 @@
   overflow: hidden;
 }
 
-.action-selected {
+.action--select-1 .action-1, .action--select-2 .action-2, .action--select-3 .action-3 {
   color: white !important;
 }
 

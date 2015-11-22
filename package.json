@@ -1,12 +1,12 @@
 {
   "name": "react-pull",
   "version": "1.0.0",
-  "description": "",
+  "description": "Pull action for react",
   "main": "index.js",
   "scripts": {
     "start": "node_modules/webpack-dev-server/bin/webpack-dev-server.js"
   },
-  "author": "",
+  "author": "Yuanyan Cao",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.2.1",
