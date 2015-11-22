@@ -115,6 +115,7 @@ var Pull = React.createClass({
       	removeClass(contentEl, 'container--reset');
       });
     }
+
   },
   handleOrientation: function(ev) {
     var y = ev.gamma; // In degree in the range [-90,90]
@@ -146,30 +147,25 @@ var Pull = React.createClass({
     this.actionEl.className = 'action action--select-' + this.posActionEl;
   },
   doAction: function(){
-
-    React.Children.toArray(this.props.children)
+    console.log('do what?')
   },
   render: function(){
     return (
-      <div ref="container"
-        onTouchStart={this.handleTouchStart}
-        onTouchMove={this.handleTouchMove}
-        onTouchEnd={this.handleTouchEnd}
-        className="container">
-        <div ref="actionWrap" className="action-wrap">
-          <div ref="action" className="action">
-            {this.props.children}
+      <div style={{height: win.height}}>
+        <div ref="container"
+          onTouchStart={this.handleTouchStart}
+          onTouchMove={this.handleTouchMove}
+          onTouchEnd={this.handleTouchEnd}
+          className="container">
+          <div ref="actionWrap" className="action-wrap">
+            <div ref="action" className="action">
+              {this.props.children}
+            </div>
           </div>
+          <this.props.component />
         </div>
-        <this.props.component />
       </div>
     )
-  }
-})
-
-Pull.Action = React.createClass({
-  render: function(){
-    return React.Children.only(this.props.children)
   }
 })
 

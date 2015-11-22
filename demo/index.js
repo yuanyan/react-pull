@@ -8,18 +8,27 @@ var Demo = React.createClass({
 
     return (
       <Pull component={Page}>
-        <Pull.Action onSelect={null}>
-          <a href="#" className="action__item"><i className="fa fa-facebook"></i></a>
-        </Pull.Action>
-        <Pull.Action>
-          <a href="#" className="action__item"><i className="fa fa-twitter"></i></a>
-        </Pull.Action>
-        <Pull.Action>
-          <a href="#" className="action__item"><i className="fa fa-google-plus"></i></a>
-        </Pull.Action>
-      </Pull>
+        <a href="#" style={styles.action}><i className="fa fa-plus"></i></a>
+        <a href="#" style={styles.action}><i className="fa fa-refresh"></i></a>
+        <a href="#" style={styles.action}><i className="fa fa-close"></i></a>
+    </Pull>
     )
   }
 })
+
+var styles = {
+  action: {
+  	position: 'relative',
+  	textAlign: 'center',
+  	WebkitFlex: '1 1 auto',
+  	flex: '1 1 auto',
+  	lineHeight: '60px',
+  	fontSize: '1.5rem',
+  	width: 60,
+  	height: 60,
+  	zIndex: 100,
+  	color: '#757575'
+  }
+}
 
 ReactDOM.render(<Demo />, document.getElementById('demo'))

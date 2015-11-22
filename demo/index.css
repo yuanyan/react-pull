@@ -12,13 +12,17 @@
 
 .action-wrap {
 	height: 50%;
-	background: #9E8DDA;
+	background: #f2f2f2;
   position: relative;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: flex-end;
   align-items: flex-end;
   overflow: hidden;
+}
+
+.action-selected {
+  color: white !important;
 }
 
 .action {
@@ -42,7 +46,7 @@
 	top: 50%;
 	left: 50%;
 	margin: -30px 0 0 -30px;
-	background: #7C6FAB;
+	background: #3b78e7;
 	width: 60px;
 	height: 60px;
 	border-radius: 50%;
