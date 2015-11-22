@@ -1,6 +1,12 @@
 # PULL
+> Work In Process
 
 ![screenshot](https://raw.githubusercontent.com/yuanyan/react-pull/master/screenshot/screenshot.gif)
+
+### Install
+```
+npm i react-pull
+```
 
 ### Usage
 
@@ -16,7 +22,7 @@ var Demo = React.createClass({
         <a href="#" style={styles.action}><i className="fa fa-plus"></i></a>
         <a href="#" style={styles.action}><i className="fa fa-refresh"></i></a>
         <a href="#" style={styles.action}><i className="fa fa-close"></i></a>
-    </Pull>
+      </Pull>
     )
   }
 })
