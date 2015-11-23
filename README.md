@@ -1,5 +1,5 @@
 # PULL
-> Work In Process
+> Work In Progress
 
 ![screenshot](https://raw.githubusercontent.com/yuanyan/react-pull/master/screenshot/screenshot.gif)
 
