@@ -4,9 +4,18 @@ var Pull = require('../src/index');
 var Page = require('./Page');
 
 var Demo = React.createClass({
+  onPullStart: function() {
+
+  },
+  onPullMove: function() {
+
+  },
+  onPullEnd: function(ev) {
+    console.log(ev)
+  },
   render: function() {
     return (
-      <Pull component={Page}>
+      <Pull component={Page} onPullStart={this.onPullStart} onPullMove={this.onPullMove} onPullEnd={this.onPullEnd} onPullCancel={null}>
         <a href="#" style={styles.action}><i className="fa fa-plus"></i></a>
         <a href="#" style={styles.action}><i className="fa fa-refresh"></i></a>
         <a href="#" style={styles.action}><i className="fa fa-close"></i></a>

@@ -43,7 +43,7 @@ var Pull = React.createClass({
     this.actionEl = ReactDOM.findDOMNode(this.refs.action);
     var actions = this.actionEl.children;
     for(var i=0; i<actions.length; i++) {
-      addClass(actions[i], 'action-' + (i+1));
+      addClass(actions[i], 'action-' + i);
     }
   },
   handleTouchStart: function(ev){
@@ -83,14 +83,14 @@ var Pull = React.createClass({
 
       // change the selected action item when moving to the left/right.
       if( this.props.triggerOn === 'touchmove' ) {
-        this.selectAction(ev);
+        this.activeAction(ev);
       }
 
       // calculate the distance the container needs to be translated
       this.translateVal = -this.actionWrapH + touchYDelta/this.friction;
 
       // set the transform value for the container
-      this.setContentTransform();
+      this.setContentTransform(this.translateVal);
 
       // show the selected sharing item if touchYDelta > triggerDistance
       if( touchYDelta > this.triggerDistance ) {
@@ -117,7 +117,8 @@ var Pull = React.createClass({
         removeClass(contentEl, 'container--action');
         removeClass(contentEl, 'container--active');
       	// after expanding trigger the action functionality
-      	this.doAction();
+        ev.actionIndex = this.actionIndex - 1;
+        this.props.onPullEnd(ev)
       }.bind(this));
     }
 
@@ -131,7 +132,14 @@ var Pull = React.createClass({
       	removeClass(contentEl, 'container--reset');
       });
     }
+  },
+  setContentTransform: function(translateVal){
+    var contentEl = ReactDOM.findDOMNode(this.refs.container);
 
+    contentEl.style.webkitTransform = contentEl.style.transform = 'translate3d(0, ' + translateVal + 'px, 0)';
+  },
+  setSelectAction: function(actionIndex){
+    this.actionEl.className = 'action action--select-' + actionIndex;
   },
   handleOrientation: function(ev) {
     var y = ev.gamma; // In degree in the range [-90,90]
@@ -144,26 +152,18 @@ var Pull = React.createClass({
     	margins = (180 - 180 * this.winfactor) / 2;
 
     // calculate which sharing item should be selected depending on the position of the touch/device
-    this.posActionEl = Math.max(Math.min(Math.floor((y - margins) / this.winslice), this.actionElemsTotal-1), 0) + 1;
-    this.actionEl.className = 'action action--select-' + this.posActionEl;
+    this.actionIndex = Math.max(Math.min(Math.floor((y - margins) / this.winslice), this.actionElemsTotal-1), 0);
+    this.setSelectAction(this.actionIndex);
   },
-  setContentTransform: function(){
-    var contentEl = ReactDOM.findDOMNode(this.refs.container);
-
-    contentEl.style.webkitTransform = contentEl.style.transform = 'translate3d(0, ' + this.translateVal + 'px, 0)';
-  },
-  selectAction: function(ev){
+  activeAction: function(ev){
     // windows width divided by the total number of action items
     var winslice = win.width * this.winfactor / this.actionElemsTotal;
     var touchpos = parseInt(ev.changedTouches[0].clientX);
     var margins = (win.width - win.width * this.winfactor) / 2;
 
     // calculate which sharing item should be selected depending on the position of the mouse/touch
-    this.posActionEl = Math.max(Math.min(Math.floor((touchpos - margins) / winslice), this.actionElemsTotal-1), 0) + 1;
-    this.actionEl.className = 'action action--select-' + this.posActionEl;
-  },
-  doAction: function(){
-    console.log('do what?')
+    this.actionIndex = Math.max(Math.min(Math.floor((touchpos - margins) / winslice), this.actionElemsTotal-1), 0);
+    this.setSelectAction(this.actionIndex);
   },
   render: function(){
     return (
